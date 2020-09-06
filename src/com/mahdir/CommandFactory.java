@@ -22,6 +22,7 @@ public class CommandFactory
 		commands.put("shutdown", new Shutdown());
 		commands.put("help", new Help());
 		commands.put("listen", new Listen());
+		commands.put("connect", new Connect());
 	}
 	
 	/**
