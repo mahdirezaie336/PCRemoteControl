@@ -1,5 +1,7 @@
 package com.mahdir.command;
 
+import java.io.IOException;
+
 import com.mahdir.Command;
 import com.mahdir.InvalidArgumentException;
 /**
@@ -16,7 +18,17 @@ public class Shutdown implements Command
 	@Override
 	public String execute(String[] args) throws InvalidArgumentException
 	{
-		
+		String command = "";
+		for(String arg : args)
+			command += arg + " ";
+		try
+		{
+			Process p = Runtime.getRuntime().exec(command);
+		} 
+		catch (IOException e)
+		{
+			throw new InvalidArgumentException(e.getMessage());
+		}
 		return "ok";
 	}
 	
