@@ -2,32 +2,29 @@ package com.mahdir.command;
 
 import com.mahdir.Command;
 import com.mahdir.InvalidArgumentException;
+
 /**
- * This command shuts the server computer down whether it has a windows OS or linux.
+ * This command is used to terminate the listener.
  * 
  * @author Mahdi Rezaie
  *
  */
-public class Shutdown implements Command 
+public class Terminate implements Command
 {
-	/**
-	 * Tries to shutdown the server.
-	 */
+	
 	@Override
 	public String execute(String[] args) throws InvalidArgumentException
 	{
-		
+		if(Listen.terminate)
+			Listen.terminate = true;
 		return "ok";
 	}
-	
-	/**
-	 * 
-	 */
+
 	@Override
 	public String getHelp()
 	{
-		String text = "Shutdowns the server pc.";
-		return text;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
