@@ -15,16 +15,18 @@ public class Terminate implements Command
 	@Override
 	public String execute(String[] args) throws InvalidArgumentException
 	{
-		if(Listen.terminate)
+		if(!Listen.terminate)
 			Listen.terminate = true;
+		else
+			throw new InvalidArgumentException("Listener is not running.");
 		return "ok";
 	}
 
 	@Override
 	public String getHelp()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		String text = "Closes the listener.";
+		return text;
 	}
 
 }
