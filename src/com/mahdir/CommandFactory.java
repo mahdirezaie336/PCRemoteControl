@@ -48,6 +48,7 @@ public class CommandFactory
 		}
 		catch(Exception e)
 		{
+			if(e instanceof InvalidArgumentException) throw e;
 			throw new InvalidArgumentException("Command " + args[0] + " not found.\n"
 					+ "Enter 'help' to see available commands.");
 		}
@@ -69,6 +70,7 @@ public class CommandFactory
 		}
 		catch(Exception e)
 		{
+			if(e instanceof InvalidArgumentException) throw e;
 			throw new InvalidArgumentException("Command " + args[1] + " not found.\n"
 					+ "Enter 'help' to see available commands.");
 		}

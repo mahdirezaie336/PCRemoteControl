@@ -34,17 +34,25 @@ public class Listen implements Command
 	{
 		terminate = false;
 		
-		try															// Opening the port
+		try																		// Opening the port
 		{
 			int port = Integer.parseInt(args[1]);
 			welcomingSocket = new ServerSocket(port);
 		} 
-		catch (Exception e1)
+		catch (NumberFormatException e1)
 		{
-			throw new InvalidArgumentException(e1.getMessage());
+			throw new InvalidArgumentException("Invalid port number " + args[1]);
+		}
+		catch (ArrayIndexOutOfBoundsException e)
+		{
+			throw new InvalidArgumentException("Enter a port number.");
+		}
+		catch(IOException e)
+		{
+			throw new InvalidArgumentException(e.getMessage());
 		}
 		
-		while(!terminate)											// Running listener loop
+		while(!terminate)														// Running listener loop
 		{
 			try 
 			{
@@ -61,7 +69,7 @@ public class Listen implements Command
 		}
 		
 		/*
-		try															// Closing the port
+		try																		// Closing the port
 		{
 			welcomingSocket.close();
 		} catch (IOException e)
