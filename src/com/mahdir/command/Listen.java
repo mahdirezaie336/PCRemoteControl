@@ -68,14 +68,14 @@ public class Listen implements Command
 			}
 		}
 		
-		/*
+		
 		try																		// Closing the port
 		{
 			welcomingSocket.close();
 		} catch (IOException e)
 		{
 			//throw new InvalidArgumentException(e.getMessage());
-		}*/
+		}
 		
 		return "Listener terminated.";
 	}

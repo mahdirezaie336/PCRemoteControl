@@ -56,7 +56,7 @@ public class Session implements Runnable
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			System.err.println("Session terminated: " + e.getMessage() + "\n");
 		}
 	}
 

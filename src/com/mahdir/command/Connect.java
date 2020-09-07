@@ -50,12 +50,12 @@ public class Connect implements Command
 				DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 				)
 		{
-
+			System.out.println("Enter 'terminate' to terminate connection.");
 			while(true)																		// Client-side loop
 			{
 				System.out.print(args[1] + ":" + args[2] + "> ");
 				String command = scanner.nextLine();
-				if(command.equals("quit"))
+				if(command.equals("terminate"))
 					break;
 				dos.writeUTF(command);
 				String response = dis.readUTF();
@@ -75,7 +75,7 @@ public class Connect implements Command
 	{
 		String text = "Connects to an mcat server.\n"
 					+ "Usage: connect <host> <port>\n"
-					+ "to close connection type 'quit'";
+					+ "to terminate connection type 'terminate'.\n";
 		return text;
 	}
 

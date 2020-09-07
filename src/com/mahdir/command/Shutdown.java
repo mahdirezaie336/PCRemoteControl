@@ -18,12 +18,9 @@ public class Shutdown implements Command
 	@Override
 	public String execute(String[] args) throws InvalidArgumentException
 	{
-		String command = "";
-		for(String arg : args)
-			command += arg + " ";
 		try
 		{
-			Process p = Runtime.getRuntime().exec(command);
+			Runtime.getRuntime().exec(args);
 		} 
 		catch (IOException e)
 		{
@@ -38,7 +35,7 @@ public class Shutdown implements Command
 	@Override
 	public String getHelp()
 	{
-		String text = "Shutdowns the server pc.";
+		String text = "Shuts down the server pc.\n";
 		return text;
 	}
 
