@@ -19,13 +19,27 @@ import com.mahdir.Session;
 public class Listen implements Command
 {
 	public static boolean terminate = false;
-	private ServerSocket welcomingSocket;
+	//private ServerSocket welcomingSocket;
 	
 	/**
 	 * Does nothing
 	 * @throws IOException
 	 */
 	public Listen() {}
+	
+	private static class Helper
+	{
+		public static ServerSocket welcomingSocket;
+	}
+	
+	/**
+	 * Returns the unique instance of socket.
+	 * @return The unique instance
+	 */
+	public static ServerSocket getInstance()
+	{
+		return Helper.welcomingSocket;
+	}
 	
 	/**
 	 * Runs the listener.
@@ -42,7 +56,7 @@ public class Listen implements Command
 				port = 16800;
 			else
 				port = Integer.parseInt(args[1]);
-			welcomingSocket = new ServerSocket(port);
+			Helper.welcomingSocket = new ServerSocket(port);
 		} 
 		catch (NumberFormatException e1)
 		{
@@ -58,7 +72,7 @@ public class Listen implements Command
 			try 
 			{
 				System.out.println("Waiting for client...");
-				Socket connection = welcomingSocket.accept();
+				Socket connection = Helper.welcomingSocket.accept();
 				System.out.println("Client accepted. Running session...");
 				Thread t = new Thread(new Session(connection));
 				t.start();
@@ -69,16 +83,17 @@ public class Listen implements Command
 			}
 		}
 		
-		
-		try																		// Closing the port
-		{
-			welcomingSocket.close();
-		} catch (IOException e)
-		{
-			//throw new InvalidArgumentException(e.getMessage());
-		}
-		
 		return "Listener terminated.";
+	}
+	
+	/**
+	 * Tries to close the server socket.
+	 * @throws IOException If any exception happens while closing connection, throws this.
+	 */
+	public static void closeConnection() throws IOException
+	{
+		terminate = true;
+		getInstance().close();
 	}
 	
 	@Override
