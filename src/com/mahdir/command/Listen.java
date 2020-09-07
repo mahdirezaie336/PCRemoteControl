@@ -10,7 +10,8 @@ import com.mahdir.Session;
 
 /**
  * This class is implementation of listen command. This command opens a port
- * on computer and listens on it for commands from the client.
+ * on computer and listens on it for commands from the client. If user does
+ * not set any ports, the port will be set on 16800 by default.
  * 
  * @author Mahdi Rezaie
  *
@@ -36,16 +37,16 @@ public class Listen implements Command
 		
 		try																		// Opening the port
 		{
-			int port = Integer.parseInt(args[1]);
+			int port;															// Checking default port
+			if(args.length < 2)
+				port = 16800;
+			else
+				port = Integer.parseInt(args[1]);
 			welcomingSocket = new ServerSocket(port);
 		} 
 		catch (NumberFormatException e1)
 		{
 			throw new InvalidArgumentException("Invalid port number " + args[1]);
-		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			throw new InvalidArgumentException("Enter a port number.");
 		}
 		catch(IOException e)
 		{
@@ -83,8 +84,8 @@ public class Listen implements Command
 	@Override
 	public String getHelp()
 	{
-		String text = "Listens on a port number for a command.\n"
-				    + "Usage: listen <portnumber>";
+		String text = "Listens on a port number for a command.\n\n"
+				    + "Usage: listen <portnumber>\n";
 		return text;
 	}
 
